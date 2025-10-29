@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.edijs.eu/</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/index_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/mystory.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/mystory.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/mystory_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/experience.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/experience.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/experience_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/portfolio.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/portfolio.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/portfolio_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/photography.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/photography.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/photography_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/video.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/video.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/video_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/restoration.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/restoration.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/restoration_lv.html" />
+  </url>
+  <url>
+    <loc>https://www.edijs.eu/mycontacts.html</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.edijs.eu/mycontacts.html" />
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.edijs.eu/mycontacts_lv.html" />
+  </url>
+</urlset>
