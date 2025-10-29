@@ -1,0 +1,3278 @@
+:root {
+	--melna-krasa: #13120D;
+	--violeta-krasa: #620B58;
+	--balta-krasa: #FFFFFF;
+}
+
+body {
+  background-color: #13120D;
+}
+
+.header {
+  display: flex;                        /* Logo un info bloki vienā rindā */
+  justify-content: space-between;       /* Starp logo un informācijas daļu */
+  align-items: center;                  /* Vertikāli centrē */
+  padding-left: 60px;
+  padding-right: 50px;
+  height: 64px;
+  background-color: #13120D;
+  color: white;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.header.scrolled {
+  background-color: rgba(98, 11, 88, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+.logo-link {
+  display: block;
+  cursor: pointer;
+  /* margin-left vairs nav vajadzīgs */
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* Teksts + valodas poga kopā */
+.location-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* vairs nav margin-right — simetrija ar .header padding */
+}
+
+/* Teksts */
+.location {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  color: white;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Valodas pārslēgšanas poga */
+.language-switch a {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 6px 16px;
+  border: 1px solid #620B58;
+  border-radius: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  transform: translateY(0px);
+}
+
+.language-switch a:hover {
+  background-color: #620B58;
+  color: white;
+}
+
+
+
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: #620B58; /* violets tonis — sader ar lapas akcentu */
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.2s ease-out;
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 56px; /* kompaktāks augstums */
+  }
+
+  .logo {
+    height: 32px; /* mazāks logo */
+  }
+
+  .location-wrapper {
+    gap: 8px; /* mazāka atstarpe starp tekstu un pogu */
+  }
+
+  .location {
+    font-size: 12px;
+  }
+
+  .language-switch a {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 48px;                     /* kompakts header augstums */
+  }
+
+  .logo {
+    height: 26px;                     /* mazāks logo attēls */
+  }
+
+  .location-wrapper {
+    gap: 6px;
+  }
+
+  .location {
+    font-size: 10px;                 /* kompakts teksts */
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  .language-switch a {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    line-height: 1;
+	transform: translateY(-1px);
+  }
+}
+
+
+main {
+  margin-top: 64px; /* Pievieno attālumu no augšas, lai izvairītos no pārklāšanās ar fiksēto <header> (kas ir 64px augsts) */
+  
+  width: 100%;                  /* Aizņem visu pieejamo platumu konteinerī (parasti <body>) */
+  max-width: 1440px;            /* Ierobežo maksimālo platumu līdz 1440px, lai saturs neizplestos pārāk plaši uz lieliem ekrāniem */
+  margin-left: auto;            /* Automātiski iestata atstarpi no kreisās puses — nepieciešams centrēšanai */
+  margin-right: auto;           /* Automātiski iestata atstarpi no labās puses — kopā ar margin-left centrē <main> */
+}
+
+
+
+
+
+
+
+.intro-wrapper {
+  display: flex;             /* Izvieto bērnelementus rindā (attēls + teksts) */
+  align-items: center;       /* Vertikāli izlīdzina tekstu ar attēlu */
+  justify-content: center;   /* Horizontāli centrē visu saturu */
+  gap: 5px;                 /* Atstarpe starp attēlu un tekstu */
+  padding: 0px;             /* Iekšējā atstarpe ap visu bloku */
+}
+
+.titulbilde {
+  height: auto;         /* Attēla augstums tiek automātiski pielāgots, lai saglabātu proporcijas */
+  width: auto;          /* Platums arī tiek automātiski aprēķināts — kopā ar height veido sākotnējo izmēru */
+  display: block;       /* Novērš liekas atstarpes, jo <img> pēc noklusējuma ir inline */
+  max-width: 100%;      /* Ierobežo attēla platumu līdz konteinera platumam (lai nepārsniegtu ekrānu) */
+  transform: translateX(-0%);
+  transform: translateY(10%);
+}
+
+.titulbilde,
+.introduction {
+  transition: transform 0.3s ease;
+}
+
+.introduction {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 600px;             /* Ierobežo teksta platumu */
+  text-align: right;            /* Visi bērnelementi līdzināti pa labo malu */
+  transform: translateX(-0%);  /* Nobīda bloku pa kreisi (50% no tā platuma) */
+  margin-top: 100px;             /* Noklusējuma augšējā atstarpe (desktopiem) */
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;  /* Montserrat fontu ģimene */
+  font-weight: 900;                        /* “Black” svars – ļoti biezs teksts */
+  font-size: 50px;                         /* Liels virsraksts uz desktop */
+  text-align: right;                       /* Teksts izlīdzināts pa labo malu */
+  line-height: 1.2;                        /* Rindstarpas blīvums */
+  margin-bottom: 16px;                     /* Atstarpe no nākamā elementa (t.i., <p>) */
+}
+
+.animated-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  text-align: right;
+  line-height: 1.3;
+  margin-bottom: 16px;
+
+  white-space: nowrap;       /* ← Saglabā visu vienā rindā */
+  overflow: visible;         /* ← Ļauj tekstam iziet ārpus konteinera */
+  word-break: normal;        /* ← Neļauj pārtraukt vārdu pa daļām */
+  position: relative;        /* ← Lai varētu izmantot z-index */
+  z-index: 2;                /* ← Teksts virs attēla */
+}
+
+animated-title .line {
+  display: block;
+  text-align: right;
+  white-space: normal;      /* ← Ļauj tekstam aplūzt, ja vajag */
+  word-break: break-word;   /* ← Ļauj vārdam aplūzt daļēji, ja nepieciešams */
+}
+
+.animated-title .line span {
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+  animation: slideIn 0.6s ease forwards;
+  /* margin-left: 6px; ← šo noņem, lai "there" netiek pabīdīts prom no "Hi" */
+}
+
+/* Animācijas kavējumi — pielāgoti pēc kārtas */
+.animated-title .line:nth-child(1) span:nth-child(1) { animation-delay: 0.2s; }
+.animated-title .line:nth-child(1) span:nth-child(2) { animation-delay: 0.5s; }
+
+.animated-title .line:nth-child(2) span:nth-child(1) { animation-delay: 0.8s; }
+.animated-title .line:nth-child(2) span:nth-child(2) { animation-delay: 1.1s; }
+
+.animated-title .line:nth-child(3) span:nth-child(1) { animation-delay: 1.1s; }
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);              /* Parādās vietā */
+    opacity: 1;
+  }
+}
+
+
+
+p {
+  font-family: 'Montserrat', sans-serif;  /* Vienots fonts ar virsrakstu */
+  font-weight: 300;                        /* Viegls, “light” svars */
+  font-size: 14px;                         /* Normāls teksta izmērs */
+  text-align: right;                       /* Teksts izlīdzināts pa labi */
+  line-height: 1.6;                        /* Palielināta rindstarpas lasāmībai */
+  margin: 0;
+  margin-top: 70px;                        /* Noklusējuma atstarpe uz leju uz lieliem ekrāniem */
+}
+
+@media (max-width: 768px) {
+  .intro-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center; /* centrē, nevis “flex-start” */
+    gap: 2px;
+    padding: 16px 12px;
+  }
+
+  .titulbilde {
+    width: clamp(140px, 60vw, 220px); /* dinamiskāks izmērs */
+    height: auto;
+    margin-top: 20px;
+    transform: none; /* noņem X pārbīdi */
+    position: relative;
+    z-index: 1;
+  }
+
+  .introduction {
+    max-width: 70%;        /* šaurāks teksts → kompaktāk */
+    margin-top: 20px;
+    margin-left: -30px;    /* pabīda tuvāk bildei */
+    text-align: right;
+    transform: none;
+    position: relative;
+    z-index: 2;
+  }
+
+  .animated-title {
+    font-size: 48px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: visible;
+    word-break: normal;
+    position: relative;
+    z-index: 2;
+	margin-bottom: 60px;
+  }
+
+  .animated-title .line {
+    text-align: right;
+    white-space: nowrap;
+    word-break: normal;
+  }
+
+  .animated-title .line span {
+    margin-left: 0;
+  }
+
+  .introduction p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: clamp(11px, 2.5vw, 14px);
+    line-height: 1.4;
+    text-align: right;
+    margin: 14px 0 0 0;
+    position: relative;
+    z-index: 2;
+    white-space: normal;
+  }
+
+  .introduction p span {
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .introduction p .intro-line {
+    display: block;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+	line-height: 0.2;
+  }
+
+  .introduction p #line2 {
+    font-size: clamp(10px, 2.2vw, 14px);
+    direction: rtl;
+    text-align: left;
+    unicode-bidi: plaintext;
+    overflow: visible;
+    position: relative;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center; /* centrē, kā 768px versijā */
+    gap: 0px;
+    padding: 16px 12px;
+	transform: translateX(-2%);
+	margin-top: 32px; /* ✅ pievienots – lielāka atstarpe no augšas */
+  }
+
+  .titulbilde {
+    width: clamp(120px, 55vw, 180px); /* elastīgs un kompakts platums */
+    height: auto;
+    margin-top: 20px;
+    transform: translateX(0%); /* pabīda pa labi, lai izlīdzinās ar tekstu */
+    position: relative;
+    z-index: 1;
+  }
+
+  .introduction {
+    max-width: 70%;        /* tāpat kā 768px versijā */
+    margin-top: 20px;
+    margin-left: -30px;    /* pabīda tuvāk bildei */
+    text-align: right;
+    transform: none;
+    position: relative;
+    z-index: 2;
+  }
+
+  .animated-title {
+    font-size: 42px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: visible;
+    word-break: normal;
+    position: relative;
+    z-index: 2;
+	margin-bottom: 35px;
+  }
+
+  .animated-title .line {
+    text-align: right;
+    white-space: nowrap;
+    word-break: normal;
+  }
+
+  .animated-title .line span {
+    margin-left: 0;
+  }
+
+  .introduction p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: clamp(10px, 3vw, 13px);
+    line-height: 1.4;
+    text-align: right;
+    margin: 12px 0 0 0;
+    position: relative;
+    z-index: 2;
+    white-space: normal;
+	margin-top: 65px;
+  }
+
+  .introduction p span {
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .introduction p .intro-line {
+    display: block;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+	line-height: 0.1;
+	
+  }
+
+  /* 🔧 Kritiska korekcija: 2. rinda tagad apgriež virzienu un samazina fontu */
+  .introduction p #line2 {
+    font-size: clamp(9px, 2.2vw, 13px);
+    direction: rtl;                  /* ← ļauj izplesties pa kreisi */
+    text-align: left;                /* ← bet teksts stāv labajā malā */
+    unicode-bidi: plaintext;         /* ← lai nepārkāš burtu secību */
+    overflow: visible;
+    position: relative;
+  }
+}
+
+
+
+
+.socialmedia {
+  display: flex;                 /* Izmanto Flexbox rindas izkārtojumam */
+  justify-content: center;       /* Centrē saturu horizontāli */
+  align-items: center;           /* Vertikāli izlīdzina ikonas vienā līnijā */
+  flex-wrap: wrap;               /* Atļauj ikonām iet nākamajā rindā, ja nepietiek vietas */
+  gap: 80px;                     /* Atstarpe starp ikonām */
+  margin-top: 25px;
+  padding: 0 16px;               /* Iekšējā atstarpe mobilajās ierīcēs */
+}
+
+.socialmedia img {
+  height: 32px;                  /* Noklusējuma izmērs ikonām */
+  width: auto;                   /* Saglabā proporcijas */
+  display: block;
+  transition: transform 0.3s;    /* Neliels efekts mijiedarbībai */
+}
+
+.socialmedia img.shutterstock {
+  height: 37px;                  /* Palielināts Shutterstock ikonas izmērs */
+  width: auto;
+}
+
+.socialmedia img:hover {
+  transform: scale(1.1); /* Palielina ikonu par 10% */
+}
+
+@media (max-width: 768px) { /* Aktivējas mobilajos un mazajās planšetēs */
+
+  .socialmedia {
+    gap: 50px;                  /* Samazina atstarpi starp ikonām (no 80px) */
+    padding: 0 8px;             /* Mazāka sānu atstarpe (iekšējais padding) */
+    margin-top: 16px;           /* Samazina augšējo atstarpi virs ikonu bloka */
+  }
+
+  .socialmedia img {
+    height: 24px;               /* Samazina ikonu augstumu (no 32px) */
+  }
+
+  .socialmedia img.shutterstock {
+    height: 28px;               /* Shutterstock ikona nedaudz lielāka (no 37px uz 28px) */
+  }
+
+}
+
+@media (max-width: 480px) { /* Aktivējas ļoti mazos ekrānos (piemēram, telefoni) */
+
+  .socialmedia {
+    gap: 40px;                 /* Samazina atstarpi starp ikonām (no 80px) */
+    padding: 0 8px;            /* Samazina sānu iekšējo atstarpi */
+    margin-top: 18px;          /* Samazina augšējo atstarpi */
+    flex-wrap: wrap;           /* Atļauj ikonām aplūzt nākamajā rindā, ja nepieciešams */
+    justify-content: center;   /* Saglabā centrējumu */
+  }
+
+  .socialmedia img {
+    height: 20px;              /* Samazināts ikonu augstums (no 32px) */
+  }
+
+  .socialmedia img.shutterstock {
+    height: 24px;              /* Nedaudz lielāks augstums Shutterstock ikonai */
+  }
+
+}
+
+
+
+.menu {
+  -ms-overflow-style: none;       /* Internet Explorer un Edge */
+  scrollbar-width: none;          /* Firefox */
+  display: flex;                  /* Flexbox — izkārto pogas vienā rindā */
+  justify-content: center;        /* Horizontāli centrē */
+  align-items: center;            /* Vertikāli centrē */
+  gap: 24px;                      /* Atstarpe starp pogām */
+  flex-wrap: wrap;                /* Atļauj pogām pārnesties nākamajā rindā */
+  padding: 20px 0;                /* Vertikāla atstarpe */
+  background-color: #13120D;      /* Tumšs fons */
+  margin-top: 50px;               /* Atstarpe no augšas */
+}
+
+.menu::-webkit-scrollbar {
+  display: none;                  /* Paslēpj ritjoslu WebKit pārlūkos */
+}
+
+.menu-button {
+  display: inline-block;          /* Lai <a> var pielietot padding, utt. */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  background-color: #13120D;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;          /* Noņem apakšsvītru no saites */
+  text-align: center;
+}
+
+.menu-button:hover {
+  background-color: #620B58;
+  transform: scale(1.1);
+  color: white;
+}
+
+.menu-button:active {
+  background-color: white;
+  color: black;
+}
+
+@media (max-width: 768px) { /* Aktivējas telefonos un mazās planšetēs */
+
+  .menu {
+    display: block;                      /* Nomaina no Flex uz block, lai izmantotu inline ritināmu saturu */
+    overflow-x: auto;                   /* Aktivē horizontālo skrollēšanu */
+    white-space: nowrap;               /* Neļauj elementiem aplūzt uz nākamo rindu */
+    padding: 12px;                      /* Iekšējā atstarpe */
+    -webkit-overflow-scrolling: touch; /* Gluda scroll darbība iOS ierīcēs */
+  }
+
+  .menu-button {
+    display: inline-block;              /* Katrs <a> elements rādās vienā rindā */
+    margin-right: 8px;                  /* Neliela atstarpe starp pogām */
+    font-size: 14px;                    /* Samazina pogas teksta izmēru */
+    padding: 8px 16px;                  /* Samazināta pogas iekšējā atstarpe */
+    white-space: nowrap;               /* Neļauj tekstam aplūzt vairākās rindās */
+  }
+}
+
+@media (max-width: 480px) { /* Aktivējas uz ļoti šauriem ekrāniem (piemēram, iPhone SE) */
+
+  .menu {
+    display: block;                      /* Saglabā inline skrollējamu izkārtojumu */
+    overflow-x: auto;                   /* Aktivē horizontālo ritināšanu */
+    white-space: nowrap;               /* Neļauj pogām aplūzt uz jaunu rindu */
+    padding: 8px;                       /* Mazāka iekšējā atstarpe */
+    -webkit-overflow-scrolling: touch; /* Gluda scroll darbība iOS ierīcēs */
+  }
+
+  .menu-button {
+    display: inline-block;              /* Katrs <a> tiek rādīts vienā rindā */
+    margin-right: 6px;                  /* Vēl mazāka atstarpe starp pogām */
+    font-size: 12px;                    /* Mazāks fonta izmērs — kompaktākas pogas */
+    padding: 6px 12px;                  /* Vēl mazāka iekšējā atstarpe */
+    white-space: nowrap;               /* Neļauj tekstam aplūzt vairākās rindās */
+  }
+}
+
+
+
+
+.thumbnails {
+  display: grid;                               /* Aktivizē Grid layout */
+  grid-template-columns: repeat(2, auto);      /* 2 kolonnas */
+  justify-content: center;                     /* Centrē bloku horizontāli */
+  align-items: center;                         /* Vertikāli centrē katru šūnu */
+  column-gap: 110px;                           /* Atstarpe starp kolonnām */
+  row-gap: 40px;                               /* Atstarpe starp rindām */
+  margin-top: 100px;                           /* Augšējā atstarpe */
+  padding: 0 16px;                             /* Iekšējā sānu atstarpe */
+}
+
+.thumbnails img {
+  width: 378px;         /* fiksē platumu pēc tava oriģinālā izmēra */
+  height: auto;         /* ļauj SVG saglabāt proporciju (250px augstums) */
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.1);               /* Palielina attēlu par 10% */
+  filter: brightness(1.2);             /* Palielina spilgtumu par 20% */
+}
+
+.thumbnails img:active {
+  transform: scale(1.05);                      /* Mazāks palielinājums klikšķa brīdī */
+  filter: blur(1px);                           /* Nedaudz mazāks blur nospiešanas laikā */
+}
+
+@media (max-width: 1000px) {
+  .thumbnails {
+    grid-template-columns: 1fr;          /* Viena kolonna zem 1000px */
+    justify-items: center;               /* Centrē attēlus */
+    column-gap: 0;                       /* Nav horizontālās atstarpes */
+  }
+
+  .thumbnails img {
+    width: 290px;                        /* Mazāks izmērs planšetēs un tālāk */
+  }
+}
+
+footer {
+  margin-top: 130px;                     /* Augšējā atstarpe */
+  margin-bottom: 40px;                   /* Apakšējā atstarpe */
+  background-color: #13120D;             /* Tumšs fons */
+  display: flex;                         /* Flexbox izkārtojums */
+  flex-direction: column;                /* Elementi vienā kolonnā */
+  align-items: center;                   /* Centrē horizontāli */
+  justify-content: center;               /* Vertikāls centrējums */
+  padding: 24px 16px;                    /* Iekšējās malas */
+  gap: 8px;                              /* Atstarpes starp <p> */
+}
+
+footer p {
+  color: white;                          /* Teksta krāsa */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+}
+
+/* Pirmais <p>: edijs.com */
+footer p:first-of-type {
+  font-weight: 600;                      /* SemiBold */
+  font-size: 12px;                       /* Mazāks izmērs */
+  line-height: 1.3;
+}
+
+/* Otrais <p>: © 2025 All rights reserved. */
+footer p:nth-of-type(2) {
+  font-weight: 400;                      /* Regular */
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* Trešais <p>: Design, coding... */
+footer p:nth-of-type(3) {
+  font-weight: 600;                      /* SemiBold */
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) { /* Aktivējas planšetēs un telefonos (ekrāns ≤ 768px) */
+  footer {
+    padding: 16px 12px;           /* Samazina vertikālo un horizontālo iekšējo atstarpi */
+    gap: 6px;                     /* Mazāka atstarpe starp rindām */
+    margin-top: 80px;            /* Samazina attālumu virs kājenes */
+    margin-bottom: 24px;         /* Mazāka apakšējā atstarpe */
+  }
+
+  footer p {
+    font-size: 12px;             /* Samazina vispārējo teksta izmēru */
+    line-height: 1.4;            /* Nedaudz kompaktāka rindstarpas attiecība */
+  }
+
+  footer p:first-of-type {
+    font-size: 10px;             /* Mazāks izmērs domēna rindiņai (edijs.com) */
+  }
+
+  footer p:nth-of-type(2) {
+    font-size: 10px;             /* Mazāks izmērs autortiesību rindiņai */
+  }
+
+  footer p:nth-of-type(3) {
+    font-size: 12px;             /* Galvenais teksts — mazliet lielāks, lai saglabā lasāmību */
+  }
+}
+
+@media (max-width: 480px) { /* Aktivējas ļoti šauriem ekrāniem (piemēram, viedtālruņiem) */
+
+  footer {
+    padding: 12px 8px;            /* Īsāka iekšējā atstarpe visapkārt */
+    gap: 4px;                     /* Mazāka atstarpe starp tekstiem */
+    margin-top: 60px;             /* Vēl kompaktāka augšējā atstarpe */
+    margin-bottom: 16px;          /* Vēl mazāka apakšējā atstarpe */
+  }
+
+  footer p {
+    font-size: 10px;              /* Vispārējs mazāks teksts — piemērots mazam ekrānam */
+    line-height: 1.3;             /* Kompaktāka rindstarpas attiecība */
+  }
+
+  footer p:first-of-type {
+    font-size: 9px;               /* Domēna rindiņa — pavisam kompakta */
+  }
+
+  footer p:nth-of-type(2) {
+    font-size: 9px;               /* Autortiesību rindiņa — arī samazināta */
+  }
+
+  footer p:nth-of-type(3) {
+    font-size: 10px;              /* Galvenais kredīts — saglabā lielāku izmēru */
+  }
+}
+
+
+
+
+.titles {
+  font-family: 'Montserrat', sans-serif; /* Montserrat fontu ģimene */
+  font-weight: 900;                      /* "Black" svars */
+  font-size: 40px;                       /* Teksta izmērs */
+  text-transform: uppercase;             /* Visi lielie burti */
+  color: white;                          /* Ja fonam nepieciešams kontrasts */
+  text-align: center;                    /* Pēc izvēles: centrēts teksts */
+  margin-top: 250px;                      /* Atstarpe no augšas */
+  margin-bottom: 80px;                  /* <-- Šeit palielināta atstarpe no apakšas */
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) { /* Planšetēm un mazākiem ekrāniem */
+
+  .titles {
+    font-size: 32px;              /* Mazāks virsraksta izmērs, salīdzinot ar desktop */
+    margin-top: 180px;            /* Samazināta augšējā atstarpe */
+    margin-bottom: 60px;          /* Nedaudz mazāka apakšējā atstarpe */
+    letter-spacing: 0.7px;        /* Nedaudz mazāka burtu atstarpe */
+  }
+}
+
+@media (max-width: 480px) { /* Mobilajiem telefoniem */
+
+  .titles {
+    font-size: 28px;              /* Vēl mazāks virsraksts — piemērots telefonam */
+    margin-top: 120px;            /* Kompakta augšējā atstarpe */
+    margin-bottom: 40px;          /* Samazināta apakšējā atstarpe */
+    letter-spacing: 0.5px;        /* Vēl kompaktāka burtu atstarpe */
+  }
+}
+
+
+
+.pamatateksts {
+  font-family: 'Montserrat', sans-serif; /* Salasāms, tīrs fonts */
+  font-weight: 400;                      /* Regular svars */
+  font-size: 16px;                       /* Uzlabots izmērs ērtai lasīšanai */
+  color: white;                          /* Balts teksts uz tumša fona */
+  line-height: 1.8;                      /* Palielināta rindstarpas ērtākai lasīšanai */
+  text-align: justify;                   /* Abpusēji izlīdzināts teksts */
+  letter-spacing: 0.2px;                 /* Nedaudz palielināta atstarpe starp burtiem */
+  max-width: 700px;                      /* Ierobežots platums lasāmībai */
+  margin: 0 auto 24px auto;              /* Centrēts un ar atstarpi apakšā */
+  padding: 0 12px;                       /* Sānu attālums no malas — īpaši noder mobilajos */
+}
+
+.story-background {
+  position: relative;                   /* Nepieciešams, lai strādātu ::before/::after */
+  max-width: 740px;                     /* Atbilst tekstam */
+  margin: 0 auto;                       /* Centrēts horizontāli */
+  padding: 0 42px;                      /* Sānu atstarpe */
+}
+
+.story-background::before,
+.story-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #620B58;           /* Violeta svītra */
+}
+
+.story-background::before {
+  left: 0;
+}
+
+.story-background::after {
+  right: 0;
+}
+
+
+/* === Jaunais interaktīvais efekts katram blokam === */
+.story-background details {
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.story-background summary {
+  font-family: 'Montserrat', sans-serif; /* Tieši norāda fontu arī summary */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 8px;
+}
+
+.story-background details[open] summary {
+  color: #ffcc66; /* Akcentēts, kad atvērts */
+}
+
+.story-background details p {
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .story-background {
+    max-width: 100%;
+    padding: 0 24px;                   /* Samazināta sānu atstarpe */
+  }
+
+  .pamatateksts {
+    font-size: 15px;                  /* Mazāks fonts ērtai lasīšanai */
+    line-height: 1.6;
+    padding: 0 8px;                   /* Šaurāks iekšējais padding */
+    margin: 0 auto 20px auto;         /* Samazināta apakšējā atstarpe */
+  }
+
+  .story-background details {
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+
+  .story-background summary {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .story-background details[open] summary {
+    color: #ffcc66;
+  }
+
+  .story-background details p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-background {
+    max-width: 100%;
+    padding: 0 16px;                     /* Samazināta sānu atstarpe */
+  }
+
+  .pamatateksts {
+    font-size: 14px;                    /* Mazāks fonta izmērs */
+    line-height: 1.6;
+    padding: 0 6px;                     /* Vēl mazāks iekšējais padding */
+    margin: 0 auto 16px auto;           /* Mazāka apakšējā atstarpe */
+  }
+
+  .story-background details {
+    padding: 8px 12px;                 /* Kompaktāks iekšējais padding */
+    font-size: 14px;
+    border-radius: 4px;
+  }
+
+  .story-background summary {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+
+  .story-background details p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .story-background details[open] summary {
+    color: #ffcc66;
+  }
+}
+
+
+
+
+.subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 48px auto 24px auto;
+  margin-bottom: 80px;
+  max-width: 700px;
+  padding: 0 12px; /* Simetriski no abām pusēm */
+}
+@media (max-width: 768px) {
+  .subtitle {
+    font-size: 24px;           /* Mazāks izmērs planšetēm */
+    margin: 40px auto 20px auto;
+    margin-bottom: 60px;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subtitle {
+    font-size: 20px;           /* Mazāks izmērs mobilajiem */
+    margin: 32px auto 16px auto;
+    margin-bottom: 48px;
+    padding: 0 12px;
+  }
+}
+
+.skills-row {
+  display: flex;
+  align-items: flex-start;   /* līdzinām augšdaļā */
+  gap: 40px;
+  max-width: 700px;
+  margin: 0 auto 24px auto;
+  padding: 0 12px;
+}
+
+.skills {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  white-space: nowrap; /* Nedrīkst aplūzt */
+}
+
+.skillteksti-kolonna {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%; /* Ļauj rindiņām aizņemt visu atlikušo vietu */
+}
+
+.skillteksts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ļauj tekstam un ikonai stāvēt malās */
+  gap: 25px;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  color: white;
+  margin: 0;
+  padding-top: 2px;
+}
+
+.skillteksts img.skills-icon {
+  margin-left: auto;          /* Spiež ikonu uz labās malas */
+  height: 20px;
+}
+
+.skills-icon {
+  height: 20px;
+  width: auto;
+}
+
+.subtitle2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 48px auto 24px auto;
+  margin-top: 140px;
+  margin-bottom: 60px;
+  max-width: 700px;
+  padding: 0 12px; /* Simetriski no abām pusēm */
+}
+
+.text-block {
+  max-width: 900px;           /* Kopējā bloka platums */
+  margin: 0 auto;             /* Centrē horizontāli */
+  padding: 0 12px;            /* Sānu attālums mobilajiem */
+}
+
+.subtitle3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 100px auto 80px auto;
+  max-width: 700px;
+  padding: 0 12px;
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 2.5fr; /* Trīs kolonnas ar samērīgiem platumiem */
+  column-gap: 24px;
+  row-gap: 16px;
+  max-width: 700px;       /* Ierobežot kolonnas kopējo platumu */
+  margin: 0 auto;         /* CENTRĒT HORIZONTĀLI */
+  padding: 0 12px;
+}
+
+.education-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Vertikālās atstarpes starp ierakstiem */
+}
+
+.pamatateksts2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  margin: 0;
+  line-height: 1.6;
+  text-align: left;
+}
+.right-align {
+  margin-left: auto;
+  display: block;
+  height: 20px;
+  transform: translateY(2px); /* ← pabīda ikonu uz leju */
+}
+
+.space-between {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.skills-left {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Attālums starp keksis un tekstu */
+}
+.centered-skill {
+  display: flex;
+  align-items: center;       /* Vertikāli centrē visus elementus */
+  justify-content: center;   /* Horizontāli centrē visu bloku */
+  gap: 25px;                 /* Atstarpe starp ikonām un tekstu */
+  width: 100%;
+}
+
+.skill-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pilna-rinda {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.skill-start {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spuldzite-laba-mala {
+  margin-left: auto;   /* spiež pie labās malas */
+  display: block;
+  height: 20px;
+}
+
+.skills.web-align {
+  padding-top: 14px;
+}
+.skills-left-column {
+  padding-top: 2px;
+  display: flex;
+  flex-direction: column;
+}
+.skill-name {
+  padding-top: 1px; /* vai pamēģini 4px, 5px, atkarībā no vajadzīgā efekta */
+  display: inline-block;
+}
+.skills-row.adobe .skills-icon {
+  transform: translateY(0px); /* Pacelt par 2px */
+}
+.spuldzite-microsoft {
+  transform: translateY(3px); /* Pabīda spuldzīti uz leju */
+}
+
+.skills.long-label {
+  max-width:200px;   /* Ierobežo platumu, lai lauztu rindu */
+  flex-wrap: wrap;    /* Ļauj tekstam iet otrajā rindā */
+  line-height: 1.3;
+}
+.restoration-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 80px auto 48px auto;
+  max-width: 700px;
+  padding: 0 12px;
+}
+
+.restoration-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  max-width: 700px;
+  margin: 0 auto 24px auto;
+  padding: 0 12px;
+}
+
+.restoration-left {
+  flex: 1;
+}
+
+.restoration-skill {
+  display: flex;
+  align-items: center;        /* Vertikāla centrēšana */
+  justify-content: space-between; /* Spuldzīte pie labās malas */
+  gap: 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-wrap: wrap;            /* Ļauj tekstam aplūzt 2. rindā */
+  width: 100%;
+}
+
+.restoration-skill span {
+  flex: 1;                    /* Teksts aizņem visu brīvo vietu */
+  word-break: break-word;
+}
+
+.restoration-icon {
+  height: 20px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.restoration-icon.right {
+  margin-left: auto;
+}
+
+.restoration-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.restoration-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* Teksts pa kreisi, spuldzīte labajā malā */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  color: white;
+  padding: 4px 0;
+}
+
+.restoration-label {
+  flex: 1;
+  word-break: break-word;
+}
+
+.education-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.education-row {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 2.5fr;
+  align-items: center; /* ← vertikāli centrē visās kolonnās */
+  gap: 24px;
+}
+
+.education-column {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) { /* Aktivējas uz planšetēm un šaurākiem ekrāniem */
+  main {
+    padding: 0 12px;                /* Iekšējā atstarpe no abām pusēm */
+    margin-left: auto;             /* Centrē <main> bloku pa kreisi */
+    margin-right: auto;            /* Centrē <main> bloku pa labi */
+    min-width: 320px;              /* Neļauj <main> sarauties pārāk šauru */
+    width: 100%;                   /* Aizņem visu pieejamo platumu */
+    box-sizing: border-box;        /* Atļauj padding ietilpt platumā */
+  }
+
+  .skills-row,
+  .restoration-row {
+    gap: 32px;                     /* ↑ Atstarpe starp kreiso un labo kolonnu (palielināta) */
+    padding: 0 8px;                /* Sānu atstarpe visam row */
+    flex-wrap: nowrap;            /* Saglabā rindu vienā līnijā (2 kolonnas) */
+  }
+
+  .skills-left-column {
+    min-width: 160px;             /* Minimālais platums kreisajai kolonnai (“web programming” u.c.) */
+  }
+
+  .skills {
+    font-size: 15px;              /* Mazāks fonta izmērs kreisajai kolonnai */
+    gap: 12px;                    /* Atstarpe starp ikonu un tekstu */
+    white-space: normal;          /* Atļauj tekstam lauzties nākamajā rindā */
+    
+    line-height: 1.3;             /* Nedaudz blīvāka rindstarpas attiecība */
+  }
+
+  .skillteksts,
+  .restoration-item {
+    font-size: 16px;              /* Fonta izmērs labajai kolonnai (HTML, CSS, utt.) */
+    gap: 12px;                    /* Atstarpe starp tekstu un spuldzi */
+  }
+
+  .skillteksts img,
+  .restoration-icon {
+    height: 16px;                 /* Spuldzes vai ikonas augstums */
+    margin-left: auto;           /* Pabīda spuldzi pie labās malas */
+  }
+
+  .skills-icon {
+    height: 16px;                 /* Keksis ikonas augstums */
+    width: auto;                 /* Saglabā proporcijas */
+  }
+
+  .subtitle2,
+  .subtitle3 {
+    font-size: 24px;             /* Mazāks virsraksta izmērs */
+    margin-top: 60px;            /* Augšējā atstarpe virsrakstiem */
+    margin-bottom: 40px;         /* Apakšējā atstarpe virsrakstiem */
+    padding: 0 12px;             /* Sānu atstarpe virsrakstiem */
+  }
+
+  .education-grid {
+    gap: 12px;                   /* Atstarpe starp rindām izglītības/pieredzes režģī */
+    padding: 0 12px;             /* Sānu atstarpe režģim */
+  }
+
+  .education-column {
+    font-size: 14px;             /* Teksta izmērs izglītības kolonnām */
+  }
+
+  .text-block {
+    padding: 0 12px;             /* Sānu atstarpe tekstu blokiem (piemēram, education) */
+  }
+
+  .restoration-skill {
+    font-size: 18px;             /* Restaurācijas virsrakstu tekstu izmērs */
+  }
+
+  .restoration-icon.right {
+    margin-left: auto;           /* Spiež restaurācijas spuldzi pie labās malas */
+  }
+}
+@media (max-width: 480px) {
+  /* Nodrošina, ka viss <main> saturs ir centrēts un nesaraujas pārāk šauri */
+  main {
+    padding: 0 12px;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 320px;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Aizliedz horizontālo ritināšanu */
+  }
+
+  /* 2 kolonnas: virsraksts + prasmes bloks, saglabā horizontālu struktūru */
+  .skills-row,
+  .restoration-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 0 4px;
+    margin-bottom: 16px;
+  }
+
+  .skills-left-column {
+    min-width: 120px;
+  }
+
+  /* Kreisās kolonnas nosaukumi */
+  .skills {
+  font-size: 13px;              /* Mazs, salasāms teksts */
+  gap: 10px;                    /* Atstarpe starp ikonu un tekstu */
+  display: inline-flex;         /* ← Lai teksts aplūzt blakus ikonai vienā blokā */
+  
+  flex-wrap: nowrap;            /* ← Saglabā ikonu + tekstu vienā rindā horizontāli */
+  white-space: normal;          /* ← Atļauj vārdiem lauzties nākamajā rindā */
+  line-height: 1.3;             /* Normāla rindstarpas attiecība */
+  align-items: center;          /* ← CENTRĒ keksis ar tekstu vertikāli */
+}
+
+  /* Labās kolonnas saturs (HTML, CSS utt.) */
+  .skillteksti-kolonna {
+    width: 60%;
+  }
+
+  .skillteksts,
+  .restoration-item {
+    display: flex;
+    justify-content: space-between; /* ← NODROŠINA spuldzi pa labi */
+    align-items: center;
+    font-size: 10px;
+    gap: 9px;
+    padding: 2px 0;
+    
+    white-space: normal;
+  }
+
+  .skills-icon,
+.restoration-icon {
+  height: 14px;                 /* Fiksēts augstums */
+  width: auto;                  /* Saglabā proporcijas */
+  max-height: 14px;             /* Nodrošina, ka nepārsniedz noteikto */
+  display: inline-block;        /* Nodrošina korektu līdzinājumu */
+  vertical-align: middle;       /* Nolīdzina ikonas ar tekstu */
+  object-fit: contain;          /* Nodrošina samērojamību ar saturu */
+}
+
+  .skills-icon.right-align,
+  .restoration-icon.right {
+    margin-left: auto; /* ← Spiež ikonu uz labo pusi */
+    display: block;
+    height: 14px;
+  }
+
+  .subtitle2,
+  .subtitle3 {
+    font-size: 18px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+    padding: 0 8px;
+  }
+
+  .education-grid,
+  .text-block {
+    padding: 0 8px;
+  }
+
+  .education-column {
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+.restoration-skill {
+    font-size: 12px;
+  }
+
+.restoration-list {
+    margin-top: 27px;
+  }
+
+  /* Papildus drošībai */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+
+
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  align-items: center;
+}
+
+.photo-frame {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+  background-color: #13120D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* vai 'contain', ja vēlies redzēt visu attēlu */
+  display: block;
+}
+
+
+/* =========================================
+   GALLERY — PLANŠETE (≤850px)
+   ========================================= */
+@media (max-width: 850px) {
+  .gallery {
+    display: flex;
+    flex-direction: column;     /* saglabā vertikālu izvietojumu */
+    align-items: center;        /* centrē visus attēlus */
+    gap: 48px;                  /* mazāka atstarpe starp bildēm */
+    padding: 0 16px;            /* drošs sānu “elpošanas” attālums */
+    box-sizing: border-box;     /* padding ietilpst platumā */
+  }
+
+  .photo-frame {
+    width: 100%;                /* aizņem visu pieejamo platumu */
+    max-width: 600px;           /* bet nepārsniedz šo */
+    aspect-ratio: 4 / 3;        /* automātiski uztur proporciju */
+    height: auto;               /* augstums pielāgojas */
+    background-color: #13120D;  /* saglabā tavu fona toni */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 6px;         /* neliels noapaļojums planšetei */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;        /* attēls saglabā proporcijas */
+    display: block;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  /* Centrē <main> bloku */
+  main {
+    display: block;              /* Standarta blokveida izkārtojums */
+    margin-left: auto;           /* Centrē pa kreisi */
+    margin-right: auto;          /* Centrē pa labi */
+    padding: 0 16px;             /* Iekšējā sānu atstarpe */
+    width: 100%;                 /* Aizņem visu platumu */
+    max-width: 100%;             /* Neļauj pārsniegt ekrāna platumu */
+    box-sizing: border-box;      /* Padding ietilpst platumā */
+  }
+
+  /* Galerija: saglabā kolonnas struktūru, samazina attēlu izmērus */
+  .gallery {
+    display: flex;               /* Joprojām vertikāla kolonna */
+    flex-direction: column;
+    align-items: center;         /* Centrē bildes horizontāli */
+    gap: 40px;                   /* Atstarpe starp attēliem */
+    padding: 0 12px;             /* Sānu atstarpes visai galerijai */
+  }
+
+  /* Katra attēla konteiners */
+  .photo-frame {
+    width: 100%;                 /* Aizņem visu pieejamo platumu */
+    max-width: 600px;            /* Ierobežo platumu planšetei */
+    aspect-ratio: 4 / 3;         /* Saglabā proporciju attiecību */
+    height: auto;                /* Automātisks augstums pēc attiecības */
+    margin: 0 auto;              /* Centrē katru attēlu */
+    background-color: #13120D;   /* Saglabā esošo fona krāsu */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Attēls iekšā .photo-frame */
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;         /* Parāda visu attēlu, nezaudējot proporcijas */
+    display: block;
+  }
+}
+@media (max-width: 480px) {
+  /* Centrē <main> bloku */
+  main {
+    display: block;              /* Nodrošina normālu bloka uzvedību */
+    margin-left: auto;           /* Centrē pa kreisi */
+    margin-right: auto;          /* Centrē pa labi */
+    padding: 0 8px;              /* Sānu atstarpe */
+    width: 100%;                 /* Pilna platuma izmantošana */
+    max-width: 100%;
+    min-width: 320px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Galerija — saglabā kolonnas struktūru, samazina starpības */
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;                   /* Mazāka atstarpe starp attēliem */
+    padding: 0 8px;
+  }
+
+  /* Attēla rāmis — samazināts mobilajiem */
+  .photo-frame {
+    width: 100%;                 /* Aizņem visu pieejamo platumu */
+    max-width: 100%;             /* Neļauj pārsniegt ekrānu */
+    aspect-ratio: 4 / 3;         /* Saglabā formu */
+    height: auto;
+    background-color: #13120D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Viegls ēnojums mobilajā */
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+.video-container {
+  position: relative;        /* Nepieciešams, ja būtu absoluti pozicionēts saturs */
+  width: 100%;               /* Aizņem visu pieejamo platumu */
+  max-width: 800px;          /* Ierobežo maksimālo platumu (piemēram, uz desktop) */
+  margin: 40px auto;         /* Centrēts horizontāli + vertikāla atstarpe */
+  aspect-ratio: 16 / 9;      /* Uztur video proporciju (responsive risinājums) */
+}
+
+.video-container iframe {
+  width: 100%;               /* Aizpilda konteinera platumu */
+  height: 100%;              /* Aizpilda konteinera augstumu (automātiski no aspect-ratio) */
+  border: none;              /* Aizvieto novecojušo frameborder="0" */
+  display: block;            /* Noņem lieko tukšumu ap iframe */
+}
+@media (max-width: 768px) {
+  .video-container {
+    width: 100%;                  /* Aizņem visu pieejamo platumu */
+    max-width: 100%;              /* Neļauj pārsniegt ekrāna platumu */
+    aspect-ratio: 16 / 9;         /* Saglabā video proporciju */
+    margin: 24px auto;            /* Vertikāla atstarpe un centrēts */
+    padding: 0 12px;              /* Sānu iekšējā atstarpe (planšetei) */
+    box-sizing: border-box;       /* Padding neietekmē kopējo platumu */
+  }
+
+  .video-container iframe {
+    width: 100%;                  /* Pilnībā ietilpst konteinerī */
+    height: 100%;                 /* Saglabā proporciju, ja vecākajam ir aspect-ratio */
+    border: none;                 /* Noņem rāmi */
+    display: block;               /* Noņem lieku atstarpi zem video */
+  }
+}
+
+@media (max-width: 480px) {
+  .video-container {
+    width: 100%;                  /* Aizņem visu pieejamo platumu */
+    max-width: 100%;              /* Neļauj pārsniegt ekrāna robežas */
+    aspect-ratio: 16 / 9;         /* Saglabā proporciju bez papildu height */
+    margin: 20px auto;            /* Nedaudz mazāka vertikālā atstarpe */
+    padding: 0 8px;               /* Vēl šaurāka sānu atstarpe mobilajiem */
+    box-sizing: border-box;       /* Precīzs platums ar padding */
+  }
+
+  .video-container iframe {
+    width: 100%;                  /* Pilnībā aizpilda konteineru */
+    height: 100%;                 /* Tiek aprēķināts no aspect-ratio */
+    border: none;                 /* Noņem border */
+    display: block;               /* No liekām atstarpēm */
+  }
+}
+
+
+
+.gallery-wrapper {
+  display: flex;
+  justify-content: center;   /* centrē horizontāli */
+}
+
+.gallery-column {
+  display: flex;
+  flex-direction: column;    /* vertikāli — viena kolonna */
+  align-items: center;       /* centrē katru foto horizontāli */
+  gap: 40px;                 /* atstarpe starp bildēm */
+}
+
+.photo-frame2 {
+  width: 450px;
+  height: 600px;             
+  overflow: hidden;
+  background-color: #13120D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  margin: 0px auto 70px auto;            /* ← ja nav .gallery-wrapper, centrē atsevišķi */
+}
+
+.photo-frame2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* vai "cover", ja vēlies piegriezt, nevis visu rādīt */
+  display: block;
+}
+.subtitle4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0px auto 30px auto;
+  max-width: 700px;
+  padding: 0 12px;
+}
+
+.photo-frame img,
+.photo-frame2 img {
+  transition: transform 0.3s ease, filter 0.3s ease; /* gludas pārejas */
+}
+
+.photo-frame img:hover,
+.photo-frame2 img:hover {
+  transform: scale(1.03); /* neliela palielināšana */
+  filter: brightness(1.1) contrast(1.05); /* nedaudz izteiktāka bilde */
+}
+
+@media (max-width: 768px) {
+  .gallery-wrapper {
+    display: flex;
+    flex-wrap: nowrap;               /* ← Saglabā 2 kolonnas vienā rindā */
+    justify-content: center;
+    gap: 24px;                       /* Mazāka atstarpe starp kolonnām */
+    padding: 32px 12px 60px;
+    box-sizing: border-box;
+  }
+
+  .gallery-column {
+    width: 50%;                      /* ← Katra kolonna aizņem pusi no platuma */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;                       /* Samazināta vertikālā atstarpe */
+    box-sizing: border-box;
+  }
+
+  .photo-frame2 {
+    width: 100%;                     /* ← Aizņem visu kolonnas platumu */
+    aspect-ratio: 3 / 4;             /* ← Saglabā 450x600 proporciju */
+    height: auto;
+    background-color: #13120D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .photo-frame2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;               /* ← Piegriež malas, bet rāmis paliek proporcionāls */
+    display: block;
+  }
+
+  .subtitle4 {
+    font-size: 24px;
+    margin: 0 auto -16px auto;
+    padding: 0 8px;
+    letter-spacing: 0.75px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-wrapper {
+    display: flex;
+    flex-wrap: nowrap;              /* ← Saglabā 2 kolonnas blakus */
+    justify-content: center;
+    gap: 12px;                      /* Mazāka atstarpe starp kolonnām */
+    padding: 20px 8px 40px;
+    box-sizing: border-box;
+  }
+
+  .gallery-column {
+    width: 50%;                     /* ← Katra kolonna aizņem pusi no ekrāna */
+    display: flex;
+    flex-direction: column;
+    align-items: center;            /* ← Attēli centrēti kolonnu iekšpusē */
+    gap: 16px;                      /* Samazināta vertikālā atstarpe */
+    box-sizing: border-box;
+  }
+
+  .photo-frame2 {
+    width: 100%;                    /* ← Pielāgojas kolonnas platumam */
+    aspect-ratio: 3 / 4;            /* ← Saglabā proporciju */
+    height: auto;                   /* ← Augstumu nosaka proporcija */
+    background-color: #13120D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .photo-frame2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;              /* ← Piegriež malas, saglabājot rāmi */
+    display: block;
+  }
+
+  .subtitle4 {
+    font-size: 18px;                /* Mazāks virsraksts mobilajās ierīcēs */
+    margin: 0 auto -10px auto;
+    padding: 0 6px;
+    letter-spacing: 0.5px;
+  }
+}
+
+
+
+.mycontacts2 {
+  display: block;
+  margin: 40px auto;   /* Centrē horizontāli */
+  width: 250px;        /* Vai jebkurš vēlamais izmērs */
+  height: auto;        /* Saglabā proporcijas */
+}
+.gmail {
+  color: white;                          /* Teksta krāsa */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 120px;
+}
+.gmail a {
+  color: white;
+  text-decoration: none;    /* Noņem pasvītrojumu, ja nevēlies */
+}
+
+.gmail a:hover {
+  text-decoration: underline;  /* Var pievienot efektu uzbraucot ar peli */
+}
+
+.form-intro {
+  color: white;                          /* Teksta krāsa */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+}
+
+.contact-form {
+  max-width: 450px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+}
+
+.contact-form label {
+  font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background: #f0f0f0;
+  color: #333;
+}
+
+.contact-form button {
+  padding: 12px;
+  background-color: #620B58;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.contact-form button:hover {
+  background-color: #555;
+}
+
+@media (max-width: 768px) {
+  .mycontacts2 {
+    width: 180px;             /* Samazināts no 250px */
+    margin: 32px auto;
+  }
+
+  .gmail {
+    font-size: 18px;          /* Mazāks virsraksts */
+    margin-bottom: 80px;      /* Mazāka apakšējā atstarpe */
+  }
+
+  .form-intro {
+    font-size: 18px;          /* Samazināts virsraksta izmērs */
+  }
+
+  .contact-form {
+    max-width: 340px;         /* Šaurāks forms lauks */
+    margin: 32px auto;
+    gap: 12px;                /* Tuvākie lauki */
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 8px;             /* Mazāks padding */
+    font-size: 14px;          /* Mazāks fonts */
+  }
+
+  .contact-form button {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+  }
+}
+@media (max-width: 480px) {
+  .mycontacts2 {
+    width: 140px;             /* Vēl šaurāks ikonas bloks */
+    margin: 24px auto;
+  }
+
+  .gmail {
+    font-size: 16px;          /* Mazāks fonts */
+    margin-bottom: 60px;      /* Mazāka apakšējā atstarpe */
+    padding: 0 8px;
+  }
+
+  .form-intro {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+
+  .contact-form {
+    max-width: 280px;         /* Īpaši šauriem telefoniem */
+    margin: 24px auto;
+    gap: 10px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .contact-form button {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 3px;
+  }
+}
+
+.menu-hint {
+  display: none; /* pēc noklusējuma paslēpts desktopā */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: white;
+  opacity: 0.7;
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  animation: scrollHintAnim 1.5s ease-in-out infinite;
+}
+
+/* Animācija, kas maina caurspīdīgumu */
+@keyframes scrollHintAnim {
+  0%, 100% { opacity: 0.3; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(6px); }
+}
+
+/* Parādās tikai uz šauriem ekrāniem */
+@media (max-width: 768px) {
+  .menu-hint {
+    display: block;
+  }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+  .menu {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .thumbnails {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    column-gap: 0;
+    justify-items: center;
+    padding: 0 12px;
+    margin: 0 auto;
+  }
+
+  .thumbnails img {
+    height: 140px;
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+  html[lang="lv"] .intro-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center; /* ← centrē attēlu + tekstu */
+    gap: 2px;
+    padding: 16px 12px;
+  }
+
+  html[lang="lv"] .titulbilde {
+    width: clamp(140px, 60vw, 220px); /* ← iepriekš bija 120–180px */
+    height: auto;
+    margin-top: 20px;
+    transform: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  html[lang="lv"] .introduction {
+    max-width: 70%;
+    margin-top: 20px;
+    transform: none;
+    text-align: right;
+    margin-left: -30px;
+    position: relative;
+    z-index: 2;
+  }
+
+  html[lang="lv"] .animated-title {
+    font-size: 42px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: visible;
+    word-break: normal;
+    position: relative;
+    z-index: 2;
+  }
+
+  html[lang="lv"] .animated-title .line {
+    text-align: right;
+    white-space: nowrap;
+    word-break: normal;
+  }
+
+  html[lang="lv"] .animated-title .line span {
+    margin-left: 0;
+  }
+
+  html[lang="lv"] .introduction p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: clamp(10px, 3vw, 13px);
+    line-height: 1.4;
+    text-align: right;
+    margin: 30px 0 0 0;
+    position: relative;
+    z-index: 2;
+    white-space: normal;
+  }
+
+  html[lang="lv"] .introduction p span {
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  html[lang="lv"] .introduction p .intro-line {
+    display: block;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap; /* ← ŠIS ir svarīgais papildinājums */
+    line-height: 0.1;     /* ← Šis samazina vertikālās atstarpes */
+  }
+
+  html[lang="lv"] .introduction p #line2 {
+    font-size: clamp(9px, 2.2vw, 13px);
+    direction: rtl;
+    text-align: left;
+    unicode-bidi: plaintext;
+    overflow: visible;
+    position: relative;
+  }
+}
+
+@media (max-width: 480px) {
+  html[lang="lv"] .intro-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center; /* centrē, kā 768px versijā */
+    gap: 0px;
+    padding: 16px 12px;
+	
+  }
+
+  html[lang="lv"] .titulbilde {
+    width: clamp(120px, 55vw, 180px); /* elastīgs un kompakts platums */
+    height: auto;
+    margin-top: 20px;
+    transform: translateX(5%); /* pabīda pa labi, lai izlīdzinās ar tekstu */
+    position: relative;
+    z-index: 1;
+  }
+
+  html[lang="lv"] .introduction {
+    max-width: 70%;        /* tāpat kā 768px versijā */
+    margin-top: 20px;
+    margin-left: -30px;    /* pabīda tuvāk bildei */
+    text-align: right;
+    transform: translateX(-3%);
+    position: relative;
+    z-index: 2;
+  }
+
+  html[lang="lv"] .animated-title {
+    font-size: 40px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: visible;
+    word-break: normal;
+    position: relative;
+    z-index: 2;
+  }
+
+  html[lang="lv"] .animated-title .line {
+    text-align: right;
+    white-space: nowrap;
+    word-break: normal;
+  }
+
+  html[lang="lv"] .animated-title .line span {
+    margin-left: 0;
+  }
+
+  html[lang="lv"] .introduction p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: clamp(10px, 3vw, 13px);
+    line-height: 1.4;
+    text-align: right;
+    margin: 12px 0 0 0;
+    position: relative;
+    z-index: 2;
+    white-space: normal;
+	margin-top: 70px;
+  }
+
+  html[lang="lv"] .introduction p span {
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  html[lang="lv"] .introduction p .intro-line {
+    display: block;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap; /* ← ŠIS ir svarīgais papildinājums */
+	line-height: 0.1; /* ← Šis samazina vertikālās atstarpes */
+	
+  }
+
+  html[lang="lv"] .introduction p #line2 {
+    font-size: clamp(9px, 2.2vw, 13px);
+    direction: rtl;
+    text-align: left;
+    unicode-bidi: plaintext;
+    overflow: visible;
+    position: relative;
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+  html[lang="lv"] .restoration-skill span {
+    font-size: 15px;               /* ← Samazināts fonta izmērs */
+    white-space: normal;           /* Atļauj vārdiem pāriet nākamajā rindā */
+    word-break: normal;            /* Aizliedz vārda pārrāvumu pa burtiem */
+    overflow-wrap: anywhere;       /* Lauž starp vārdiem, ja nepieciešams */
+    display: inline-block;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  html[lang="lv"] .education-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  html[lang="lv"] .education-column {
+    font-size: 11px;
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: normal;            /* ← Ļauj vārdiem aplūzt */
+    word-break: break-word;         /* ← Lauž vārdu vajadzības gadījumā */
+    overflow-wrap: break-word;      /* ← Papildu nodrošināšanai */
+    line-height: 1.3;
+  }
+  
+  html[lang="lv"] .education-column:nth-child(2) {
+    margin-left: -8px; /* ← Pabīda tuvāk pa kreisi */
+  }
+}
+
+
+
+/* Centrē "my contacts" thumbnail (abām valodām un visiem URL variantiem) */
+.thumbnails a[href*="mycontacts"] {
+  display: flex;
+  justify-content: center;
+  grid-column: 1 / -1;   /* aizņem abu kolonnu platumu (vienu pilnu rindu) */
+  justify-self: center;  /* centrē šajā rindā */
+}
+
+.thumbnails a[href*="mycontacts"] img {
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+
+.skillteksts71 {
+  display: grid;
+  grid-template-columns: 1fr 20px; /* Teksts + spuldze */
+  column-gap: 8px;                 /* Neliela atstarpe */
+  align-items: center;             /* Vertikāli centrē */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  color: white;
+  margin: 0 auto 24px auto;
+  padding: 0 12px;
+  max-width: 700px;
+  
+}
+
+.skillteksts71 img.skills-icon6 {
+  height: 20px;
+  width: auto;
+  object-fit: contain;
+  justify-self: end;               
+  
+}
+
+
+
+
+
+
+
+
+
+
+.figma-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;           /* šī paliek attēlu savstarpējai atstarpei */
+  margin-top: 24px;    /* attālums no virsraksta "Gallery:" */
+  margin-bottom: 150px; /* ← palielina atstarpi zem galerijas pirms "RESTORATION WORKS" */
+}
+
+.figma-gallery img {
+  width: auto;
+  max-width: 400px;     /* ierobežo platumu (vai maini pēc vajadzības) */
+  max-height: 500px;    /* ← ierobežo augstumu — novērš pārlieku garas bildes */
+  object-fit: cover;    /* saglabā rāmi un “apgriež” pārāk garas bildes */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.figma-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 204, 102, 0.4);
+}
+
+.skills-row10 {
+  display: flex;
+  align-items: flex-start;     /* tāpat kā .skills-row */
+  gap: 40px;
+  max-width: 700px;
+  margin: 80px auto 24px auto; /* ↑ palielināta augšējā atstarpe (no 0 uz 80px) */
+  padding: 0 12px;
+}
+
+
+
+
+/* ===== CSS GALLERY ===== */
+.css-gallery {
+  position: relative;
+  width: 70%;          /* nedaudz šaurāka par sākotnējo (ideāls vidus variants) */
+  max-width: 600px;    /* lai uz lieliem ekrāniem bilde neizstieptos pārāk plaša */
+  margin: 50px auto;
+}
+
+.css-gallery input {
+  display: none;
+}
+
+.images {
+  position: relative;
+  width: 100%;
+  z-index: 2; /* bildes virs navigācijas */
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.image a {
+  position: relative;
+  z-index: 3; /* klikšķis uz bildes prioritāte */
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: zoom-in; /* vizuāls norādījums, ka bilde ir klikšķināma */
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+/* Tikai izvēlētā bilde redzama */
+#img1:checked ~ .images .image:nth-child(1),
+#img2:checked ~ .images .image:nth-child(2),
+#img3:checked ~ .images .image:nth-child(3),
+#img4:checked ~ .images .image:nth-child(4),
+#img5:checked ~ .images .image:nth-child(5),
+#img6:checked ~ .images .image:nth-child(6),
+#img7:checked ~ .images .image:nth-child(7),
+#img8:checked ~ .images .image:nth-child(8),
+#img9:checked ~ .images .image:nth-child(9),
+#img10:checked ~ .images .image:nth-child(10) {
+  opacity: 1;
+  position: relative;
+}
+
+/* bija: z-index: 1;  => zem bildes */
+.nav {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: white;
+  z-index: 4;             /* ← pacel virs .image a (kam ir z-index:3) */
+  pointer-events: none;   /* konteiners neklausās klikšķus */
+}
+
+.nav label{
+  pointer-events: auto;   /* bet pašas bultiņas ir klikšķināmas */
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.25);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: color .3s, background .3s;
+}
+
+.nav label:hover {
+  color: #ffcc66;
+  background: rgba(0,0,0,0.4);
+}
+
+/* Rāda pareizās bultiņas konkrētajai bildei */
+#img1:checked ~ .nav1,
+#img2:checked ~ .nav2,
+#img3:checked ~ .nav3,
+#img4:checked ~ .nav4,
+#img5:checked ~ .nav5,
+#img6:checked ~ .nav6,
+#img7:checked ~ .nav7,
+#img8:checked ~ .nav8,
+#img9:checked ~ .nav9,
+#img10:checked ~ .nav10 {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .css-gallery {
+    width: 85%;         /* ← no 70% uz 85% — vairāk elpas, bet vēl eleganti */
+    max-width: 750px;   /* ← palielināts limits */
+    margin: 50px auto;  /* saglabā atstarpi augšā un apakšā */
+  }
+}
+
+@media (max-width: 480px) {
+  .css-gallery {
+    width: 100%;         /* ← pilna ekrāna platums */
+    max-width: none;     /* ← noņem jebkādu ierobežojumu */
+    margin: 30px 0;      /* vertikāla atstarpe, bez sānu */
+    padding: 0;          /* noņem iekšējo padding, ja bija */
+  }
+}
+
+
+
+
+
+
+
+/* ===== IMAGE COMPARISON (blur reveal slider) ===== */
+.photo-compare {
+  position: relative;
+  width: 800px;           /* tāds pats izmērs kā photography sadaļā */
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0;       /* asas malas */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* abas bildes pārklājas pilnībā */
+.photo-compare img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* saglabā proporciju */
+}
+
+/* apakšējais slānis — asā bilde */
+.pc-base {
+  z-index: 1;
+}
+
+/* augšējais slānis — tā pati bilde ar blur */
+.pc-blur {
+  z-index: 2;
+  filter: blur(8px);
+  transform: scale(1.02); /* novērš blur malu parādīšanos */
+  clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+}
+
+/* ===== Slider (input type="range") ===== */
+.pc-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: ew-resize;
+  z-index: 4;
+  appearance: none;
+  -webkit-appearance: none;
+  accent-color: #620B58;
+}
+.pc-range:focus {
+  outline: none;
+}
+
+/* paslēpjam noklusēto slīdņa "thumb" */
+.pc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.pc-range::-moz-range-thumb,
+.pc-range::-ms-thumb {
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* paslēpjam arī sliedi, ja pārlūks to krāso */
+.pc-range::-webkit-slider-runnable-track,
+.pc-range::-moz-range-track,
+.pc-range::-ms-track {
+  background: transparent;
+  border: none;
+  color: transparent;
+}
+
+/* ===== Violetā līnija un punkts ===== */
+.pc-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos, 50%);
+  transform: translateX(-1px);
+  width: 2px;
+  background: #620B58; /* violetā līnija */
+  box-shadow: 0 0 12px rgba(98, 11, 88, 0.6); /* maigs mirdzums ap līniju */
+  z-index: 3;
+}
+
+/* violets punkts ar baltu apmali un spīdumu */
+.pc-handle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #620B58;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 16px rgba(98, 11, 88, 0.8);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+/* animācija, kad velk */
+.pc-range:active + .pc-handle::after {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 24px rgba(98, 11, 88, 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   BEFORE / AFTER SLIDER (FULL CSS)
+   Klases: .photo-compare, .pc-base, .pc-top, .pc-range, .pc-handle
+   ========================= */
+
+/* ===== BEFORE / AFTER COMPARISON ===== */
+.photo-compare {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0; /* asas malas kā pārējām restoration bildēm */
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* abi attēli aizpilda visu rāmi */
+.photo-compare img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* apakšējais slānis — After */
+.pc-base {
+  z-index: 1;
+}
+
+/* augšējais slānis — Before */
+.pc-top {
+  z-index: 2;
+  clip-path: inset(0 calc(100% - var(--pos,50%)) 0 0);
+  transition: clip-path 0.15s ease-out;
+}
+
+/* slider (neredzams, bet uztver vilkšanu) */
+.pc-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: ew-resize;
+  z-index: 4;
+  appearance: none;
+  -webkit-appearance: none;
+  accent-color: #620B58;
+}
+.pc-range:focus { outline: none; }
+
+/* paslēpjam noklusēto slidera rokturi */
+.pc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0; height: 0; border: none;
+}
+.pc-range::-moz-range-thumb,
+.pc-range::-ms-thumb {
+  width: 0; height: 0; border: none;
+}
+.pc-range::-webkit-slider-runnable-track,
+.pc-range::-moz-range-track,
+.pc-range::-ms-track {
+  background: transparent;
+  border: none;
+  color: transparent;
+}
+
+/* vertikālā līnija un rokturis — violets dizains */
+.pc-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos,50%);
+  transform: translateX(-1px);
+  width: 2px;
+  background: #620B58; /* violetā līnija */
+  box-shadow: 0 0 12px rgba(98,11,88,0.6);
+  z-index: 3;
+}
+
+.pc-handle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #620B58;
+  border: 3px solid #fff;
+  box-shadow: 0 0 16px rgba(98,11,88,0.8);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+/* aktīvs efekts */
+.pc-range:active + .pc-handle::after {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 24px rgba(98,11,88,1);
+}
+
+
+/* =========================================
+   RESTORATION — PLANŠETE (≤850px)
+   ========================================= */
+@media (max-width: 850px) {
+  /* Konteiners katram salīdzinājumam */
+  .photo-frame2 {
+    width: 100%;                  /* aizņem visu pieejamo platumu */
+    max-width: 600px;             /* bet nepārsniedz 600px */
+    aspect-ratio: 3 / 4;          /* saglabā proporciju */
+    height: auto;
+    background-color: #13120D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0px;           /* neliels noapaļojums planšetē */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    margin: 0 auto 60px auto;     /* centrē un pievieno elpojošu atstarpi */
+    padding: 0;                   /* bez lieka padding */
+  }
+
+  /* Iekšējais salīdzinājuma bloks */
+  .photo-compare {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Attēli iekšā — pilnībā aizpilda rāmi */
+  .photo-compare img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;            /* piegriež, bet saglabā formu */
+    display: block;
+  }
+
+  /* Slīdnis */
+  .pc-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: ew-resize;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    z-index: 4;
+  }
+
+  .pc-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+
+  /* Vertikālā līnija un punkts planšetes izmērā */
+  .pc-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos, 50%);
+    transform: translateX(-1px);
+    width: 2px;
+    background: #620B58;
+    box-shadow: 0 0 10px rgba(98, 11, 88, 0.6);
+    z-index: 3;
+  }
+
+  .pc-handle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #620B58;
+    border: 2px solid #fff;
+    box-shadow: 0 0 12px rgba(98, 11, 88, 0.8);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .pc-range:active + .pc-handle::after {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 20px rgba(98, 11, 88, 1);
+  }
+
+  /* Neliels atstatums starp secīgiem blokiem */
+  .subtitle4 {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+}
+
+/* =========================================
+   RESTORATION — MOBILĀ VERSIJA (≤480px)
+   ========================================= */
+@media (max-width: 480px) {
+  /* Katrs salīdzinājuma bloks */
+  .photo-frame2 {
+    width: 100%;
+    max-width: 100%;              /* pilna ekrāna platums */
+    aspect-ratio: 3 / 4;          /* saglabā proporciju */
+    height: auto;
+    margin: 0 auto 36px auto;     /* elpojoša atstarpe starp blokiem */
+    background-color: #13120D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+
+  /* Iekšējais salīdzinājums */
+  .photo-compare {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Attēli aizpilda rāmi; mobilajam "cover" izskatās labāk */
+  .photo-compare img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;            /* vajadzības gadījumā vari mainīt uz 'contain' */
+    display: block;
+  }
+
+  /* Slīdnis (neredzams, bet uztver vilkšanu) */
+  .pc-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: ew-resize;
+    appearance: none;
+    -webkit-appearance: none;
+    z-index: 4;
+  }
+  .pc-range:focus { outline: none; }
+  .pc-range::-webkit-slider-thumb { -webkit-appearance: none; width: 0; height: 0; background: transparent; }
+  .pc-range::-moz-range-thumb, .pc-range::-ms-thumb { width: 0; height: 0; border: none; }
+
+  /* Vertikālā līnija + roktura punkts — kompaktāks mobilajā */
+  .pc-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos, 50%);
+    transform: translateX(-1px);
+    width: 2px;
+    background: #620B58;
+    box-shadow: 0 0 8px rgba(98, 11, 88, 0.55);
+    z-index: 3;
+  }
+  .pc-handle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;                  /* mazāks punkts mobilajā */
+    height: 18px;
+    border-radius: 50%;
+    background: #620B58;
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px rgba(98, 11, 88, 0.8);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pc-range:active + .pc-handle::after {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 0 16px rgba(98, 11, 88, 1);
+  }
+
+  /* Virsraksts virs galerijas – mazāks un tuvāk */
+  .subtitle4 {
+    font-size: 18px;
+    margin: 0 auto 20px auto;
+    letter-spacing: .5px;
+  }
+}
+
+
+
+
+
+.skills-icon5 {
+  height: 35px; /* lielāks izmērs nekā .skills-icon (20px) */
+  width: auto;  /* saglabā proporcijas */
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  transition: transform 0.3s ease; /* vienāds efekts kā citām ikonām */
+}
+
+.skills-icon5:hover {
+  transform: scale(1.1); /* neliels hover efekts */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==== EXPERIENCE: stabils un responsīvs izkārtojums ==== */
+.experience-page main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Galvenais izkārtojums — teksts nedaudz pabīdīts pa labi */
+.experience-page .skillteksts71{
+  display:grid;
+  /* ← kontrolē bīdi tikai ar šo: palielini 10vw un/vai 140px */
+  grid-template-columns: clamp(0px, 18vw, 280px) 1fr auto;
+  align-items:center;
+  margin-bottom: clamp(12px, 2vw, 28px); /* ✅ palielina vertikālo atstarpi starp rindiņām */
+  
+  max-width:min(900px,100%);
+  margin:6px auto;
+  padding:0 8px;          /* ← vairs NAV padding-left */
+  box-sizing:border-box;
+}
+.experience-page .skillteksts71::before{ content:""; }
+
+.experience-page .skillteksts71 img.skills-icon6{
+  height:20px; width:auto; object-fit:contain;
+  justify-self:end;
+  /* ← kontrolē ikonas bīdi pa kreisi: palielini 5vw un/vai 120px */
+  padding-right: clamp(40px, 6vw, 92px);
+}
+
+
+
+
+
+
+/* --- EXPERIENCE: atceļ vecās fiksētās nobīdes --- */
+.experience-page .skillteksts71 { 
+  transform: none !important;  /* atceļ translateX(30%) */
+}
+
+.experience-page .skillteksts71 img.skills-icon6 {
+  transform: none !important;  /* atceļ translate(-217px, 2px) */
+}
+
+.experience-page .skillteksts7 {
+  transform: none !important;  /* ja šī rinda ir uz lapas */
+}
+
+/* Papildu drošība pret horizontālu pārplūdi tikai šai lapai */
+.experience-page { overflow-x: hidden; }
+
+
+
+
+/* ==== PLANŠETES versija (zem 1000px) — saglabā layout, bet samazina izmērus ==== */
+@media (max-width: 1000px) {
+  /* Galvenais konteineris */
+  .experience-page .skillteksts71 {
+    grid-template-columns: clamp(0px, 18vw, 260px) 1fr auto; /* mazāks spacer */
+    column-gap: clamp(8px, 3vw, 24px); /* mazāka atstarpe starp tekstu un spuldzi */
+    margin-bottom: clamp(8px, 1.6vw, 20px);
+    padding: 0 6px;
+  }
+
+  /* Teksts */
+  .experience-page .skillteksts71 {
+    font-size: clamp(16px, 1.8vw, 18px); /* nedaudz mazāks fonts */
+  }
+
+  /* Spuldzītes */
+  .experience-page .skillteksts71 img.skills-icon6 {
+    height: 18px;                /* samazina izmēru */
+    padding-right: clamp(24px, 5vw, 60px); /* samazina bīdi pa labi */
+  }
+
+  /* Galvenās kategorijas (Design, Code, Data, Tools) */
+  .experience-page .skills {
+    font-size: clamp(18px, 2vw, 20px);  /* mazāks virsraksts */
+    gap: clamp(12px, 2vw, 20px);        /* mazāka atstarpe starp ikonu un tekstu */
+  }
+
+  /* Lielās ikonas (design.svg, code.svg u.c.) */
+  .experience-page .skills-icon5 {
+    height: clamp(26px, 4vw, 30px);
+  }
+
+  /* Lai nekas neizspiež rindas horizontāli */
+  .experience-page .skillteksts71 > *,
+  .experience-page .skills > * {
+    min-width: 0;
+  }
+}
+
+/* ==== Anti-overflow pie ~850px (experience) ==== */
+@media (max-width: 900px){
+  .experience-page .skillteksts71{
+    /* mazāks spacer, mazāki skuķīši starp kolonnām */
+    grid-template-columns: clamp(0px, 20vw, 200px) 1fr auto;
+    column-gap: clamp(8px, 2.5vw, 18px);
+    padding-inline: 6px;
+    max-width: min(900px, 100%);
+    width: 100%;
+  }
+  .experience-page .skillteksts71 > *{ min-width: 0; } /* neļauj izspiest režģi */
+
+  .experience-page .skillteksts71 img.skills-icon6{
+    /* samazina spuldzes “bīdi” pa labi */
+    padding-right: clamp(10px, 3vw, 28px);
+    height: 18px;
+  }
+
+  .experience-page .skills{
+    font-size: clamp(16px, 2.2vw, 18px);
+  }
+}
+
+/* ==== Fix: 840–768 px zona (experience) — saspiež malas, lai nelūzt ==== */
+@media (max-width: 840px) and (min-width: 769px) {
+  .experience-page .skillteksts71{
+    /* mazāks spacer, mazākas atstarpes */
+    grid-template-columns: clamp(0px, 20vw, 220px) 1fr auto;
+    column-gap: clamp(6px, 2vw, 14px);
+    padding-inline: 6px;
+    max-width: min(900px, 100%);
+    width: 100%;
+  }
+  .experience-page .skillteksts71 > * { min-width: 0; } /* ļauj tekstam aplūzt šūnā */
+
+  .experience-page .skillteksts71{
+    font-size: clamp(15px, 1.9vw, 17px); /* maziņš samazinājums */
+    overflow-wrap: anywhere;              /* drošība gariem vārdiem */
+    word-break: break-word;
+  }
+
+  .experience-page .skillteksts71 img.skills-icon6{
+    height: 16px;
+    padding-right: clamp(4px, 1.8vw, 16px); /* daudz mazāks bīdiens pa labi */
+    justify-self: end;
+  }
+}
+
+
+/* =========================================
+   EXPERIENCE — PLANŠETE (≤768px)
+   ========================================= */
+@media (max-width: 768px){
+  /* drošība pret “lēkšanu” un horizontālo scroll */
+  html { scrollbar-gutter: stable both-edges; }
+  .experience-page { overflow-x: hidden; }
+
+  /* Viena rindas vienība: [spacer | teksts | spuldze] */
+  .experience-page .skillteksts71{
+    grid-template-columns: clamp(0px, 6vw, 60px) 1fr auto; /* mazāks spacer */
+    column-gap: clamp(36px, 12vw, 84px);                     /* mazākas atstarpes */
+    padding-inline: 6px;
+    margin: 6px auto clamp(10px, 2vw, 18px);
+    max-width: min(900px, 100%);
+    width: 100%;
+    font-size: clamp(14px, 2.2vw, 16px);
+    overflow-wrap: anywhere; word-break: break-word;
+  }
+  .experience-page .skillteksts71 > *{ min-width: 0; }
+
+  /* Spuldzīte */
+  .experience-page .skillteksts71 img.skills-icon6{
+    height: 16px; width: auto; object-fit: contain;
+    justify-self: end;
+    /* ja vajag pietuvināt tekstam: negatīvs margin pa labi */
+    margin-right: clamp(-12px, -1.6vw, -6px);
+  }
+
+  /* Sadaļu virsraksti (Design, Code, …) un lielās ikonas */
+  .experience-page .skills{
+    font-size: clamp(16px, 2.4vw, 18px);
+    gap: clamp(10px, 2vw, 16px);
+  }
+  .experience-page .skills-icon5{ height: clamp(22px, 4vw, 28px); }
+}
+  
+  
+@media (max-width: 480px){
+  /* Saglabā layout, bet vēl kompaktāk */
+  .experience-page .skillteksts71{
+    
+    column-gap: clamp(6px, 12vw, 42px);
+    padding-inline: 6px;
+    margin: 6px auto clamp(8px, 3vw, 16px);
+    font-size: clamp(13px, 3.4vw, 15px);
+  }
+}  
+  
+  
+  /* ==== PERSONAL QUALITIES — mobilā versija ==== */
+@media (max-width: 480px) {
+  .experience-page .skills-row .skills {
+    font-size: clamp(10px, 3.5vw, 13px) !important;  /* ← pievieno !important, ja citas definīcijas dominē */
+    line-height: 1.3;
+    gap: 10px;
+  }
+
+  .experience-page .skills-row .skills img.skills-icon {
+    height: 14px;
+    width: auto;
+  }
+}
+
+
+
+
+
+
+
+
+/* ===== PORTFOLIO: stabils centrs + bez pārplūdes ===== */
+/* 2️⃣ Centrēts main saturs tikai portfolio lapai */
+body.portfolio-page main {
+  margin-top: 64px;            /* atstarpe no header */
+  width: auto;                 /* noņem 100% platumu */
+  max-width: 1068px;           /* “kastes” platums */
+  margin-inline: auto;         /* centrē horizontāli */
+  padding-inline: 60px;        /* vienādas sānu malas */
+  box-sizing: border-box;
+  position: relative; /* ← atskaites punkts absolūtajām pozīcijām */
+ 
+}
+
+/* PORTFOLIO: fiksēta nobīde bez margin trikiem */
+body.portfolio-page .skillteksts7 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  color: white;
+
+  padding-top: 2px;
+  margin-bottom: 22px;
+}
+
+/* Fiksēts “spacers” 500px kreisajā pusē */
+body.portfolio-page .skillteksts7::before {
+  content: "";
+  flex: 0 0 250px;   /* nemainīgs 500px “tukšums” pa kreisi */
+}
+
+/* Saite iekšā */
+body.portfolio-page .skillteksts7 a {
+  color: #ffcc66;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+body.portfolio-page .skillteksts7 a:hover {
+  color: #ffffff;
+}
+
+
+@media (max-width: 1000px) {
+  body.portfolio-page .skillteksts7 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 18px;        /* nedaudz mazāks fonts */
+    color: white;
+
+    padding-top: 2px;
+    margin-bottom: 20px;
+  }
+
+  /* “Tukšums” pa kreisi — samazināts no 250px uz dinamisku */
+  body.portfolio-page .skillteksts7::before {
+    content: "";
+    flex: 0 0 clamp(80px, 20vw, 180px);  /* elastīgi: 80–180 px atkarībā no ekrāna */
+  }
+
+  /* Saite: mazliet mazāka un ar drošu klikšķa zonu */
+  body.portfolio-page .skillteksts7 a {
+    color: #ffcc66;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    padding: 4px 2px;
+  }
+
+  body.portfolio-page .skillteksts7 a:hover {
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 480px) {
+  body.portfolio-page .skillteksts7 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 15px;                 /* vēl kompaktāk */
+    line-height: 1.3;
+    color: white;
+
+    padding-top: 2px;
+    margin-bottom: 18px;
+
+    /* drošība pret horizontālo scroll */
+    min-width: 0;
+  }
+
+  /* kreisais “spacer” kļūst vēl šaurāks un elastīgs */
+  body.portfolio-page .skillteksts7::before {
+    content: "";
+    flex: 0 0 clamp(40px, 16vw, 100px);
+  }
+
+  /* tekstam ļaujam elastīgi aplūzt, bet nesalauzt layout */
+  body.portfolio-page .skillteksts7 > * {
+    min-width: 0;                    /* ļauj bērniem sarauties */
+  }
+
+  /* saites: mazāks fonts, lielāks pieskāriena laukums un droša aplūšana */
+  body.portfolio-page .skillteksts7 a {
+    color: #ffcc66;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 2px;                /* lielāks “tap” laukums */
+    display: inline-block;
+    white-space: normal;             /* atļauj aplūzt vairākās rindās */
+    word-break: break-word;          /* drošība garām saitēm */
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  body.portfolio-page .skillteksts7 a:hover {
+    color: #ffffff;
+  }
+}
+
+/* —— EN: mobilais (≤480px) — normalizē keksis.svg izmēru pret pārējām ikonām —— */
+@media (max-width: 480px) {
+  html[lang="en"] .skills-row .skills {
+    align-items: center;            /* vertikāli izlīdzina ikonu ar tekstu */
+    gap: 10px;                      /* tāds pats atstatums kā citām rindām */
+  }
+
+  html[lang="en"] .skills-row .skills .skills-icon {
+    width: 18px !important;         /* vienāds “kvadrāts” visām ikonām */
+    height: 18px !important;        /* pārspēj agrāko 14px noteikumu */
+    flex: 0 0 18px;                 /* neļauj ikonai sarauties */
+    display: inline-block;
+    vertical-align: middle;
+    object-fit: contain;            /* drošībai, ja SVG viewBox dīvains */
+  }
+}
+
+/* (ja gribi arī planšetēm) */
+@media (max-width: 768px) {
+  html[lang="en"] .skills-row .skills .skills-icon {
+    width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  /* Tikai LV versijai */
+  html[lang="lv"] .education-row .education-column:nth-child(3) {
+    padding-left: 10px;  /* ← pabīda trešo kolonnu pa labi */
+  }
+}
+
+
+
+* ==== Mobilais un desktop efekts uzspiežot pogu (touch / click) ==== */
+.menu-button {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* noņem iOS noklusēto pelēko/violeto mirkšķi */
+}
+
+/* Spiešanas brīdis (mobilais + desktop) */
+.menu-button:active {
+  background-color: #620B58;  /* violets fons */
+  color: white;               /* balts teksts */
+  transform: scale(1.1);      /* neliels palielinājums */
+}
+
+/* Kad atlaiž pirkstu vai atgriežas uz lapu */
+.menu-button:focus {
+  background-color: transparent; /* atjauno normālo stāvokli */
+  color: white;
+  outline: none;
+}
+
+/* Tikai mobilajām ierīcēm — pārliecinās, ka efekts ir redzams arī touch gadījumā */
+@media (max-width: 768px) {
+  .menu-button:active {
+    background-color: #620B58;
+    color: white;
+    transform: scale(1.1);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 480px) {
+  .gallery {
+    gap: 100px;        /* ← palielina atstarpes starp bildēm */
+  }
+
+@media (max-width: 480px) {
+  .photo-frame2 {
+    margin-bottom: 100px; /* ← papildus apakšējā atstarpe katram rāmim */
+  }
+}
